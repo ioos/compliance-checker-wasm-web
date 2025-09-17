@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IOOS CC Web App</title>
+  <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css" />
+  <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.18.1/plotly.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+<body>
+<div id="loadingIndicator" class="text-center" style="display: none;">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <p>Processing, please wait...</p>
+</div>
+  <div class="container my-4">
+    <div class="jumbotron text-center">
+      <h1 class="display-4">IOOS Compliance Checker</h1>
+      <p class="lead">Using PyScript to run IOOS compliance-checker in the browser.</p>
+    </div>
+<div class="section">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <h4>Upload your dataset:</h4>
+        </div>
+
+        <div class="col-md-4">
+          <label class="btn-upload">
+            <i class="fa fa-upload"></i> Browse
+            <input type="file" />
+          </label>
+        </div>
+
+        <div class="col-md-5">
+          <p id="filename-display" class="mb-0 text-muted" style="word-break: break-all;"></p>
+        </div>
+      </div>
+    </div>
+
+  <hr class="section-divider" />
+    <!-- Select test drop down-->
+    <script src="populate_dropdown.js"></script>
+   <div class="row align-items-center mb-4">
+      <div class="col-md-3 select-label-container">
+        <button type="button" class="btn btn-secondary w-100" disabled>Select the test you want to run:</button>
+      </div>
+    <div class="col-md-4">
+      <select class="form-control form-control-lg" id="select">
+        <!-- Options will be inserted dynamically by JS -->
+      </select>
+    </div>
+  <div class="col-md-5">
+    <div id="output-text">You selected: </div>
+  </div>
+</div>
+
+    <div class="submit-row">
+      <button type="button" class="btn btn-primary btn-lg" id="submit-btn">Submit</button>
+    </div>
+
+    <div class="submit-row text-center mt-4">
+      <div id="status-msg" class="font-weight-bold"></div>
+    </div>
+  </div>
+
+<py-script src="checker.py" config="./pyscript.toml"></py-script>
+<div>
+    <p id="status-msg"></p>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+      <h3 class="mb-0">Checker Report</h3>
+      <button class="btn btn-success" id="download-report-btn">
+        <i class="fa fa-download"></i> Download Report
+      </button>
+    </div>
+
+    <pre id="report-output" style="white-space: pre-wrap; background-color: #f4f4f4; padding: 1em; border: 1px solid #ccc;"></pre>
+
+</div>
+<footer class="text-center mt-5 text-muted">
+  Compliance Checker version: <span id="cc-version">Loading...</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
