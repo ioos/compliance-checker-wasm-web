@@ -1,5 +1,7 @@
 import micropip
 await micropip.install("requests")
+await micropip.install("netcdf4")
+
 from js import document
 from pyodide.ffi import create_proxy
 import compliance_checker
