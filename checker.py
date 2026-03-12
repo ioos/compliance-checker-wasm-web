@@ -1,5 +1,4 @@
 import micropip
-
 await micropip.install("requests")
 await micropip.install("netcdf4")
 
@@ -13,58 +12,25 @@ import sys
 from pyodide.ffi import to_js
 import js
 
-
-import re
-
-
-def human_key(s: str) -> tuple[list[str | int], str]:
-    """Turn a string into a sortable value that works how humans expect.
-
-    "z23A" -> (["z", 23, "a"], "z23A")
-
-    The original string is appended as a last value to ensure the
-    key is unique enough so that "x1y" and "x001y" can be distinguished.
-
-    source: https://nedbatchelder.com/blog/202503/human_sorting_improved
-    """
-
-    def try_int(s: str) -> str | int:
-        """If `s` is a number, return an int, else `s` unchanged."""
-        try:
-            return int(s)
-        except ValueError:
-            return s
-
-    return ([try_int(c) for c in re.split(r"(\d+)", s.casefold())], s)
-
-
-def human_sort(strings: list[str]) -> None:
-    """Sort a list of strings how humans expect."""
-    strings.sort(key=human_key)
-
-
 check_suite = CheckSuite()
 check_suite.load_all_available_checkers()
 document.getElementById("cc-version").innerText = compliance_checker.__version__
-
-
 def get_checker_list():
     check_suite = CheckSuite()
     check_suite.load_all_available_checkers()
-    checkers = sorted(check_suite.checkers.keys(), key=human_key)
+    checkers = list(check_suite.checkers.keys())
     if len(checkers) == 0:
         print("No checkers found!")
     else:
-        print("Populating")
+        print('Populating')
         js.populate_dropdown(to_js(checkers))
-
 
 def on_test_selected(event):
     select_element = document.getElementById("select")
     selected_index = select_element.selectedIndex
     selected_option = select_element.options.item(selected_index)
 
-    selected_text = getattr(selected_option, "text", None)
+    selected_text = getattr(selected_option, 'text', None)
     output_div = document.getElementById("output-text")
     output_div.textContent = f"You selected: {selected_text}"
 
@@ -76,9 +42,7 @@ def on_file_selected(event):
         return
 
     file = file_input.files.item(0)
-    document.getElementById(
-        "filename-display",
-    ).textContent = f"Loaded file: {file.name}"
+    document.getElementById("filename-display").textContent = f"Loaded file: {file.name}"
 
 
 async def run_checker(event):
@@ -144,7 +108,6 @@ async def run_checker(event):
     finally:
         loader.style.display = "none"
 
-
 def download_report(event):
     report_text = document.getElementById("report-output").textContent
 
@@ -152,14 +115,13 @@ def download_report(event):
         js.alert("No report to download.")
         return
 
-    blob = js.Blob.new([report_text], {"type": "text/plain"})
+    blob = js.Blob.new([report_text], { "type": "text/plain" })
     url = js.URL.createObjectURL(blob)
     link = document.createElement("a")
     link.href = url
     link.download = "compliance_report.txt"
     link.click()
     js.URL.revokeObjectURL(url)
-
 
 def setup():
     button = document.getElementById("submit-btn")
@@ -177,7 +139,6 @@ def setup():
     download_btn = document.getElementById("download-report-btn")
     if download_btn:
         download_btn.addEventListener("click", create_proxy(download_report))
-
 
 setup()
 get_checker_list()
