@@ -8,4 +8,3 @@ document.addEventListener("DOMContentLoaded", function () {
     statusMsg.innerText = "Processing... Please wait.";
   });
 });
-

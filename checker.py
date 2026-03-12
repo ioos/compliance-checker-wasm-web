@@ -1,8 +1,3 @@
-import micropip
-
-await micropip.install("requests")
-await micropip.install("netcdf4")
-
 from js import document
 from pyodide.ffi import create_proxy
 import compliance_checker
@@ -36,11 +31,6 @@ def human_key(s: str) -> tuple[list[str | int], str]:
             return s
 
     return ([try_int(c) for c in re.split(r"(\d+)", s.casefold())], s)
-
-
-def human_sort(strings: list[str]) -> None:
-    """Sort a list of strings how humans expect."""
-    strings.sort(key=human_key)
 
 
 check_suite = CheckSuite()

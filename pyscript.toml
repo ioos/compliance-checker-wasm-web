@@ -1,3 +1,10 @@
-
-packages = [ "micropip",
-  "compliance-checker>=5.4.0"]
+packages = [
+  "micropip",
+  "compliance-checker>=5.4.0",
+  "cc-plugin-og",
+  "cc-plugin-ugrid>=1.1.0",
+  "netcdf4",
+  "requests",
+  #"cc-plugin-glider",  # requires cf-units
+  #"cc-plugin-ncei",  # hangs when loading
+]
