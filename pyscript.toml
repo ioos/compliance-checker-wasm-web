@@ -5,7 +5,7 @@ packages = [
   "cc-plugin-og>=0.1.2",
   "cc-plugin-ugrid>=1.1.0",
   "cc-plugin-ncei>=2.0.4",
-  #"cc-plugin-sgrid>=0.1.0",
+  "cc-plugin-sgrid>=0.1.0",
   "netcdf4",
   "requests",
 ]
