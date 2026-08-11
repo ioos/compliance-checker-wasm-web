@@ -1,15 +1,13 @@
-from js import document
-from pyodide.ffi import create_proxy
-import compliance_checker
-from compliance_checker.runner import CheckSuite, ComplianceChecker
 import io
-import tempfile
-import sys
-from pyodide.ffi import to_js
-import js
-
-
 import re
+import sys
+import tempfile
+
+import compliance_checker
+import js
+from compliance_checker.runner import CheckSuite, ComplianceChecker
+from js import document
+from pyodide.ffi import create_proxy, to_js
 
 
 def human_key(s: str) -> tuple[list[str | int], str]:
@@ -126,7 +124,7 @@ async def run_checker(event):
 
         document.getElementById("report-output").textContent = output_text
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         sys.stdout = original_stdout
         status_msg.textContent = f"Error: {e}"
         status_msg.className = "alert alert-danger text-center"
