@@ -44,6 +44,7 @@ def get_checker_list():
         print("No checkers found!")
     else:
         print("Populating")
+        print(f"{checkers=}")
         js.populate_dropdown(to_js(checkers))
 
 
@@ -80,7 +81,8 @@ async def run_checker(event):
 
     file_input = document.querySelector('input[type="file"]')
     files = list(file_input.files)
-    checker_name = document.getElementById("select").value.split(":")[0]
+    checker_name = document.getElementById("select").value
+    print(f"{checker_name=}")
 
     output_capture = io.StringIO()
     original_stdout = sys.stdout
