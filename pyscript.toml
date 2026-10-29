@@ -1,6 +1,6 @@
 packages = [
   "micropip",
-  "compliance-checker>=5.4.0",
+  "compliance-checker>=6.1.0",
   "cc-plugin-glider>=2.2.0",
   "cc-plugin-og>=0.1.2",
   "cc-plugin-ugrid>=1.1.0",
